@@ -1,0 +1,11 @@
+D:\C\Gomoku\Gomoku\bin\Debug\Gomoku.exe.config
+D:\C\Gomoku\Gomoku\bin\Debug\Gomoku.exe
+D:\C\Gomoku\Gomoku\bin\Debug\Gomoku.pdb
+D:\C\Gomoku\Gomoku\obj\Debug\Gomoku.csproj.AssemblyReference.cache
+D:\C\Gomoku\Gomoku\obj\Debug\Gomoku.csproj.SuggestedBindingRedirects.cache
+D:\C\Gomoku\Gomoku\obj\Debug\Gomoku.Form1.resources
+D:\C\Gomoku\Gomoku\obj\Debug\Gomoku.Properties.Resources.resources
+D:\C\Gomoku\Gomoku\obj\Debug\Gomoku.csproj.GenerateResource.cache
+D:\C\Gomoku\Gomoku\obj\Debug\Gomoku.csproj.CoreCompileInputs.cache
+D:\C\Gomoku\Gomoku\obj\Debug\Gomoku.exe
+D:\C\Gomoku\Gomoku\obj\Debug\Gomoku.pdb
