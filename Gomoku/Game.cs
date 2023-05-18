@@ -51,6 +51,11 @@ namespace Gomoku
 			int centerX = board.LastPlacedNode.X;
 			int centerY = board.LastPlacedNode.Y;
 
+			// 用於紀錄獲勝需幾顆棋子 預設是5個 如果對角線已有其他棋子則會記錄起來
+			Stack<int> winCountStack = new Stack<int>();
+			// 已檢查幾個方向 前4個方向獲勝棋數必為5 後4個方向則根據對角線已記錄數量減少
+			int currentDirCount = 1;
+
 			// 檢查八個不同的方向
 			for (int xDir = -1; xDir <= 1; xDir++)
 			{
@@ -64,6 +69,7 @@ namespace Gomoku
 
 					// 紀錄現在看到幾個相同的棋子
 					int count = 1;
+					
 					while (count < 5)
 					{
 						int targetX = centerX + count * xDir;
@@ -80,11 +86,31 @@ namespace Gomoku
 						count++;
 					}
 
-					//檢查是否看到五顆棋子
-					if (count == 5)
+					// 判斷離獲勝還需幾顆棋子
+					int winCount;
+					if (currentDirCount <= 4)
+					{
+						winCount = 5;
+					}
+					else
+					{
+						winCount = winCountStack.Pop();
+					}
+
+					// 檢查是否看到獲勝數量顆棋子
+					if (count == winCount)
 					{
 						winner = currentPlayer;
 					}
+
+					// 紀錄此方向已看到幾顆棋子
+					if (currentDirCount <= 4) 
+					{
+						// +1是因為中間那顆棋子會重複檢查
+						winCountStack.Push(5 - count + 1);
+					}
+
+					currentDirCount++;
 				}
 			}
 		}
