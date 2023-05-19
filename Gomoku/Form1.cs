@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Gomoku
@@ -21,15 +22,19 @@ namespace Gomoku
 				this.Controls.Add(piece);
 
 				//檢查是否有人獲勝
-				if (game.Winner == PieceType.Black)
+				if (game.Winner != PieceType.None)
 				{
-					MessageBox.Show("黑色獲勝");
+					if (game.Winner == PieceType.Black)
+					{
+						MessageBox.Show("黑色獲勝");
+					}
+					else if (game.Winner == PieceType.White)
+					{
+						MessageBox.Show("白色獲勝");
+					}
+
 					restartButton.Visible = true;
-				}
-				else if (game.Winner == PieceType.White)
-				{
-					MessageBox.Show("白色獲勝");
-					restartButton.Visible = true;
+					backButton.Visible = false;
 				}
 			}
 		}
@@ -67,6 +72,12 @@ namespace Gomoku
 			//重新開始遊戲
 			game.RestartGame();
 			restartButton.Visible = false;
+			backButton.Visible = true;
+		}
+
+		private void backButton_Click(object sender, EventArgs e)
+		{
+			this.Controls.Remove(game.BackPlaced());
 		}
 	}
 }

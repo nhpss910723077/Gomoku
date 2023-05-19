@@ -18,8 +18,24 @@ namespace Gomoku
 
 		private Piece[,] pieces = new Piece[BOARD_SIZE, BOARD_SIZE];
 
-		private Point lastPlacedNode = NO_MATCH_NODE;
-		public Point LastPlacedNode { get { return lastPlacedNode; } }
+		private List<Point> pieceLog = new List<Point>();
+		public Point LastPlacedNode
+		{
+			get
+			{
+				if (round > 0)
+				{
+					return pieceLog.Last();
+				}
+				else
+				{
+					return NO_MATCH_NODE;
+				}
+
+			}
+		}
+
+		private int round = 0;
 
 		public PieceType GetPieceType(int nodeX, int nodeY)
 		{
@@ -97,8 +113,11 @@ namespace Gomoku
 				throw new Exception("棋子顏色錯誤");
 			}
 
-			//儲存最後一次下棋的位置
-			lastPlacedNode = node;
+			//儲存下棋紀錄
+			pieceLog.Add(node);
+
+			//回合數+1
+			round++;
 
 			return pieces[node.X, node.Y];
 		}
@@ -159,7 +178,26 @@ namespace Gomoku
 		public void InitBoard()
 		{
 			Array.Clear(pieces, 0, pieces.Length);
-			lastPlacedNode = NO_MATCH_NODE;
+			pieceLog = new List<Point>();
+			round = 0;
+		}
+
+		public Piece BackPlaced()
+		{
+			if (round > 0)
+			{
+				Point lastPlacedNode = pieceLog.Last();
+				Piece lastPlacedPiece = pieces[lastPlacedNode.X, lastPlacedNode.Y];
+				pieces[lastPlacedNode.X, lastPlacedNode.Y] = null;
+				pieceLog.RemoveAt(pieceLog.Count - 1);
+				round--;
+
+				return lastPlacedPiece;
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 }

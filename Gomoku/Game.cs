@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Gomoku
@@ -34,21 +35,26 @@ namespace Gomoku
 				CheckWinner();
 
 				// 交換選手
-				if (currentPlayer == PieceType.Black)
-				{
-					currentPlayer = PieceType.White;
-				}
-				else if (currentPlayer == PieceType.White)
-				{
-					currentPlayer = PieceType.Black;
-				}
-				else
-				{
-					throw new Exception("棋子顏色錯誤");
-				}
+				ChangePlayer();
 			}
 
 			return piece;
+		}
+
+		private void ChangePlayer()
+		{
+			if (currentPlayer == PieceType.Black)
+			{
+				currentPlayer = PieceType.White;
+			}
+			else if (currentPlayer == PieceType.White)
+			{
+				currentPlayer = PieceType.Black;
+			}
+			else
+			{
+				throw new Exception("棋子顏色錯誤");
+			}
 		}
 
 		private void CheckWinner()
@@ -74,7 +80,7 @@ namespace Gomoku
 
 					// 紀錄現在看到幾個相同的棋子
 					int count = 1;
-					
+
 					while (count < 5)
 					{
 						int targetX = centerX + count * xDir;
@@ -110,7 +116,7 @@ namespace Gomoku
 					}
 
 					// 紀錄此方向已看到幾顆棋子
-					if (currentDirCount <= 4) 
+					if (currentDirCount <= 4)
 					{
 						// +1是因為中間那顆棋子會重複檢查
 						winCountStack.Push(5 - count + 1);
@@ -130,6 +136,17 @@ namespace Gomoku
 			currentPlayer = PieceType.Black;
 			winner = PieceType.None;
 			gameOver = false;
+		}
+
+		public Piece BackPlaced()
+		{
+			Piece lastPlacedPiece = board.BackPlaced();
+			if (lastPlacedPiece != null)
+			{
+				ChangePlayer();
+			}
+
+			return lastPlacedPiece;
 		}
 	}
 }

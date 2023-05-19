@@ -12,7 +12,6 @@ namespace Gomoku
     {
         private static readonly int IMAGE_WIDTH = 50;
 
-
         public Piece(int x, int y)
         {
             this.BackColor = Color.Transparent;

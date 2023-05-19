@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
 			this.restartButton = new System.Windows.Forms.Button();
+			this.backButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// restartButton
@@ -43,12 +44,24 @@
 			this.restartButton.Visible = false;
 			this.restartButton.Click += new System.EventHandler(this.restartButton_Click);
 			// 
+			// backButton
+			// 
+			this.backButton.Font = new System.Drawing.Font("標楷體", 18F);
+			this.backButton.Location = new System.Drawing.Point(483, 12);
+			this.backButton.Name = "backButton";
+			this.backButton.Size = new System.Drawing.Size(194, 59);
+			this.backButton.TabIndex = 1;
+			this.backButton.Text = "退手";
+			this.backButton.UseVisualStyleBackColor = true;
+			this.backButton.Click += new System.EventHandler(this.backButton_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImage = global::Gomoku.Properties.Resources.board;
 			this.ClientSize = new System.Drawing.Size(751, 742);
+			this.Controls.Add(this.backButton);
 			this.Controls.Add(this.restartButton);
 			this.Name = "Form1";
 			this.Text = "五子棋";
@@ -61,6 +74,7 @@
 		#endregion
 
 		private System.Windows.Forms.Button restartButton;
+		private System.Windows.Forms.Button backButton;
 	}
 }
 
