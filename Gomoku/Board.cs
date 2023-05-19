@@ -35,6 +35,12 @@ namespace Gomoku
 
 		public bool CanBePlaced(int x, int y)
 		{
+			//如果遊戲已結束則回傳false
+			if (Game.GameOver == true)
+			{
+				return false;
+			}
+
 			//找出最近的節點
 			Point node = FindCloseNode(x, y);
 
@@ -55,10 +61,16 @@ namespace Gomoku
 
 		public Piece PlaceAPiece(int x, int y, PieceType type)
 		{
+			//如果遊戲已結束則回傳null
+			if (Game.GameOver == true)
+			{
+				return null;
+			}
+
 			//找出最近的節點
 			Point node = FindCloseNode(x, y);
 
-			//沒有則回傳false
+			//沒有則回傳null
 			if (node == NO_MATCH_NODE)
 			{
 				return null;

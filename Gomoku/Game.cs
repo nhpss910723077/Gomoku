@@ -15,6 +15,9 @@ namespace Gomoku
 		private PieceType winner = PieceType.None;
 		public PieceType Winner { get { return winner; } }
 
+		private static bool gameOver = false;
+		public static bool GameOver { get { return gameOver; } }
+
 		public bool CanBePlaced(int x, int y)
 		{
 			return board.CanBePlaced(x, y);
@@ -98,9 +101,10 @@ namespace Gomoku
 					}
 
 					// 檢查是否看到獲勝數量顆棋子
-					if (count == winCount)
+					if (count >= winCount)
 					{
 						winner = currentPlayer;
+						gameOver = true;
 					}
 
 					// 紀錄此方向已看到幾顆棋子
