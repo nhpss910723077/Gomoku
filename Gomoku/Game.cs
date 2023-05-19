@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Gomoku
 {
@@ -117,6 +119,17 @@ namespace Gomoku
 					currentDirCount++;
 				}
 			}
+		}
+
+		public void RestartGame()
+		{
+			// 初始化棋盤
+			board.InitBoard();
+
+			//初始化遊戲
+			currentPlayer = PieceType.Black;
+			winner = PieceType.None;
+			gameOver = false;
 		}
 	}
 }

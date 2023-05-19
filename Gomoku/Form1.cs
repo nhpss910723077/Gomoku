@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Gomoku
@@ -23,10 +24,12 @@ namespace Gomoku
 				if (game.Winner == PieceType.Black)
 				{
 					MessageBox.Show("黑色獲勝");
+					restartButton.Visible = true;
 				}
 				else if (game.Winner == PieceType.White)
 				{
 					MessageBox.Show("白色獲勝");
+					restartButton.Visible = true;
 				}
 			}
 		}
@@ -41,6 +44,29 @@ namespace Gomoku
 			{
 				this.Cursor = Cursors.Default;
 			}
+		}
+
+		private void restartButton_Click(object sender, EventArgs e)
+		{
+			//取得需清空的棋子
+			List<Piece> piecesToRemove = new List<Piece>();
+			foreach (Control control in this.Controls)
+			{
+				if (control is Piece piece)
+				{
+					piecesToRemove.Add(piece);
+				}
+			}
+
+			//清空棋盤上的棋子
+			foreach (Piece pieceToRemove in piecesToRemove)
+			{
+				this.Controls.Remove(pieceToRemove);
+			}
+
+			//重新開始遊戲
+			game.RestartGame();
+			restartButton.Visible = false;
 		}
 	}
 }

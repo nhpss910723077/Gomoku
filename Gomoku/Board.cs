@@ -156,8 +156,10 @@ namespace Gomoku
 			}
 		}
 
-
-
-
+		public void InitBoard()
+		{
+			Array.Clear(pieces, 0, pieces.Length);
+			lastPlacedNode = NO_MATCH_NODE;
+		}
 	}
 }
